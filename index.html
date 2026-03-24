@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjana Sharma — Product Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --accent: #E50914;
+    --accent2: #ff6b35;
+    --gold: #f5c842;
+    --text: #e5e5e5;
+    --muted: #777;
+    --border: rgba(255,255,255,0.07);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-serif: 'DM Serif Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    transition: background 0.3s;
+  }
+  nav.scrolled { background: rgba(10,10,10,0.98); }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 60px 100px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(229,9,20,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 20% 80%, rgba(255,107,53,0.06) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0d0608 100%);
+  }
+
+  /* Animated grain */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Scanlines */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, var(--bg) 0%, transparent 50%),
+      linear-gradient(to right, var(--bg) 0%, transparent 40%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 10vw, 130px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.4;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    padding: 5px 14px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .badge-primary { background: var(--accent); color: #fff; }
+  .badge-outline { border: 1px solid var(--muted); color: var(--muted); }
+  .badge-gold { background: var(--gold); color: #000; }
+
+  .hero-actions { display: flex; gap: 14px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: #fff;
+    color: #000;
+  }
+  .btn-primary:hover { background: rgba(255,255,255,0.85); transform: scale(1.02); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+  .play-icon { font-size: 18px; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 60px 60px; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-label h2 {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #fff;
+  }
+  .section-label .see-all {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .section-label:hover .see-all { opacity: 1; }
+
+  /* ── FEATURED PRODUCT ── */
+  #featured {
+    background: linear-gradient(to bottom, var(--bg), var(--surface));
+    padding-top: 0;
+  }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .featured-card:hover { border-color: rgba(229,9,20,0.3); }
+
+  .featured-thumbnail {
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, #1a0a0a 0%, #0d1117 50%, #0a0d1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thumbnail-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+  }
+  .thumbnail-placeholder .thumb-icon {
+    font-size: 52px;
+    opacity: 0.3;
+  }
+  .thumbnail-placeholder .thumb-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  /* Real screenshot placeholder */
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+  }
+  .featured-card:hover .thumb-img { opacity: 1; }
+
+  .thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(20,20,20,0.5) 0%, transparent 60%);
+  }
+
+  .featured-info {
+    padding: 48px 48px 48px 0;
+  }
+
+  .featured-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  .featured-title {
+    font-family: var(--font-display);
+    font-size: 52px;
+    letter-spacing: 1px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .featured-role {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .featured-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(229,229,229,0.7);
+    margin-bottom: 28px;
+  }
+
+  .product-stats {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-val {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--surface2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--text); }
+
+  /* ── PRODUCT ROW ── */
+  #products { background: var(--surface); }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .product-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(229,9,20,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(229,9,20,0.1);
+    z-index: 2;
+  }
+
+  .card-thumb {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #1a0a0a, #0d1117);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .product-card:hover .card-progress { width: 100%; }
+
+  .card-body { padding: 18px; }
+  .card-product-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .card-hover-info {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .product-card:hover .card-hover-info { max-height: 200px; }
+
+  .card-outcome {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+
+  /* ── SKILLS / CRAFT ── */
+  #craft { background: var(--bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .skill-group h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    padding: 7px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-tag:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .skill-tag.highlight {
+    border-color: rgba(229,9,20,0.4);
+    color: var(--accent);
+  }
+
+  /* ── EXPERIENCE / EPISODES ── */
+  #experience {
+    background: linear-gradient(to bottom, var(--bg), var(--surface));
+  }
+
+  .season {
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .season-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .season-logo-placeholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .season-info h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .season-info .season-meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .season-duration {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .episodes { padding: 0; }
+  .episode {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 20px;
+    align-items: start;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .episode:last-child { border-bottom: none; }
+  .episode:hover { background: rgba(255,255,255,0.02); }
+
+  .ep-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: rgba(255,255,255,0.1);
+    text-align: center;
+    padding-top: 4px;
+  }
+
+  .ep-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .ep-info p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .ep-info .ep-impact {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .ep-duration {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 4px;
+  }
+
+  /* ── CRITICALLY ACCLAIMED ── */
+  #acclaim {
+    background: var(--surface);
+  }
+
+  .acclaim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .acclaim-card {
+    padding: 32px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .acclaim-card:hover { border-color: rgba(229,9,20,0.3); }
+
+  .acclaim-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: var(--font-serif);
+    font-size: 120px;
+    color: rgba(229,9,20,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .acclaim-number {
+    font-family: var(--font-display);
+    font-size: 56px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .acclaim-label {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .acclaim-context {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--bg);
+    text-align: center;
+    padding: 80px 60px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(229,9,20,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 90px);
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .contact-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 18px;
+    margin-bottom: 48px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--surface);
+    transition: all 0.2s;
+  }
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(229,9,20,0.08);
+  }
+
+  .open-to {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(245,200,66,0.1);
+    border: 1px solid rgba(245,200,66,0.3);
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .open-to::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin: 0 60px;
+  }
+
+  /* ── HERO PORTRAIT ── */
+  .hero-portrait {
+    position: absolute;
+    right: 80px;
+    bottom: 80px;
+    z-index: 2;
+    width: 220px;
+    height: 280px;
+  }
+  .hero-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 4px;
+    filter: grayscale(20%) contrast(1.05);
+    display: block;
+  }
+  .hero-portrait::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(229,9,20,0.5), transparent 60%);
+    z-index: -1;
+  }
+  .hero-portrait::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, var(--bg), transparent);
+    border-radius: 0 0 4px 4px;
+    pointer-events: none;
+  }
+  @media (max-width: 900px) {
+    .hero-portrait { display: none; }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 48px 24px; }
+    #hero { padding: 0 24px 80px; }
+    .hero-title { font-size: 60px; }
+    .featured-card { grid-template-columns: 1fr; }
+    .featured-thumbnail { aspect-ratio: 16/9; }
+    .featured-info { padding: 32px 24px; }
+    .featured-title { font-size: 36px; }
+    .cards-row { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .acclaim-grid { grid-template-columns: 1fr; }
+    .episode { grid-template-columns: 40px 1fr; }
+    .ep-duration { display: none; }
+    .section-divider { margin: 0 24px; }
+    .product-stats { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">AS</div>
+  <div class="nav-links">
+    <a href="#featured">Products</a>
+    <a href="#craft">Craft</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Connect</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content fade-up visible">
+    <div class="hero-eyebrow">Product Manager · AI Platform Builder</div>
+    <h1 class="hero-title">ANJANA<br><span>SHARMA</span></h1>
+    <p class="hero-subtitle">Building enterprise AI products that<br>non-technical users actually love.</p>
+    <div class="hero-meta">
+      <span class="badge badge-primary">Bengaluru, IN</span>
+      <span class="badge badge-gold">Open to Work</span>
+      <span class="badge badge-outline">5+ Years PM</span>
+      <span class="badge badge-outline">Enterprise AI</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#featured" class="btn btn-primary">
+        <span class="play-icon">▶</span> View My Work
+      </a>
+      <a href="#contact" class="btn btn-secondary">
+        Connect
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCT -->
+<section id="featured">
+  <div class="section-label fade-up">
+    <h2>🎬 Featured Build</h2>
+    <span class="see-all">View All →</span>
+  </div>
+
+  <div class="featured-card fade-up">
+    <div class="featured-thumbnail" style="background:#080d14;">
+      <!-- Abstract Baioniq UI mockup — SVG -->
+      <svg viewBox="0 0 600 375" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0;">
+        <defs>
+          <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E50914" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#E50914" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.1"/>
+            <stop offset="100%" stop-color="#4a9eff" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="blur2">
+            <feGaussianBlur stdDeviation="2"/>
+          </filter>
+        </defs>
+
+        <!-- Background grid -->
+        <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        </pattern>
+        <rect width="600" height="375" fill="url(#grid)"/>
+
+        <!-- Glow blobs -->
+        <ellipse cx="160" cy="180" rx="180" ry="140" fill="url(#glow1)"/>
+        <ellipse cx="450" cy="120" rx="120" ry="100" fill="url(#glow2)"/>
+
+        <!-- Left panel: nav sidebar -->
+        <rect x="16" y="16" width="100" height="343" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <!-- sidebar items -->
+        <rect x="26" y="32" width="40" height="6" rx="3" fill="rgba(229,9,20,0.6)"/>
+        <rect x="26" y="32" width="80" height="6" rx="3" fill="rgba(229,9,20,0.0)"/>
+        <!-- logo -->
+        <text x="66" y="38" font-family="monospace" font-size="9" fill="rgba(229,9,20,0.9)" text-anchor="middle" font-weight="bold">BAIONIQ</text>
+
+        <rect x="26" y="60" width="16" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="48" y="64" width="52" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+        <rect x="48" y="71" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.05)"/>
+
+        <rect x="26" y="86" width="16" height="16" rx="3" fill="rgba(229,9,20,0.2)" stroke="rgba(229,9,20,0.4)" stroke-width="1"/>
+        <rect x="48" y="90" width="52" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+        <rect x="48" y="97" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+
+        <rect x="26" y="112" width="16" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="48" y="116" width="44" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+        <rect x="26" y="138" width="16" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="48" y="142" width="56" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+        <rect x="26" y="164" width="16" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+        <rect x="48" y="168" width="48" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+
+        <!-- Main area: Agent canvas -->
+        <rect x="130" y="16" width="300" height="220" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="148" y="34" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)" font-weight="600" letter-spacing="1">AGENT WORKSPACE</text>
+
+        <!-- Agent nodes -->
+        <!-- Orchestrator -->
+        <circle cx="280" cy="120" r="26" fill="rgba(229,9,20,0.12)" stroke="rgba(229,9,20,0.5)" stroke-width="1.5"/>
+        <text x="280" y="117" font-size="7" fill="rgba(229,9,20,0.9)" text-anchor="middle" font-family="monospace" font-weight="bold">AGENT</text>
+        <text x="280" y="126" font-size="6" fill="rgba(255,255,255,0.4)" text-anchor="middle" font-family="monospace">orchestrator</text>
+
+        <!-- Skill nodes -->
+        <circle cx="175" cy="90" r="18" fill="rgba(74,158,255,0.08)" stroke="rgba(74,158,255,0.3)" stroke-width="1"/>
+        <text x="175" y="87" font-size="6" fill="rgba(74,158,255,0.8)" text-anchor="middle" font-family="monospace">SKILL</text>
+        <text x="175" y="95" font-size="5" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">RAG</text>
+
+        <circle cx="175" cy="155" r="18" fill="rgba(74,158,255,0.08)" stroke="rgba(74,158,255,0.3)" stroke-width="1"/>
+        <text x="175" y="152" font-size="6" fill="rgba(74,158,255,0.8)" text-anchor="middle" font-family="monospace">SKILL</text>
+        <text x="175" y="160" font-size="5" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">Search</text>
+
+        <circle cx="385" cy="90" r="18" fill="rgba(245,200,66,0.08)" stroke="rgba(245,200,66,0.3)" stroke-width="1"/>
+        <text x="385" y="87" font-size="6" fill="rgba(245,200,66,0.8)" text-anchor="middle" font-family="monospace">TOOL</text>
+        <text x="385" y="95" font-size="5" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">API</text>
+
+        <circle cx="385" cy="155" r="18" fill="rgba(245,200,66,0.08)" stroke="rgba(245,200,66,0.3)" stroke-width="1"/>
+        <text x="385" y="152" font-size="6" fill="rgba(245,200,66,0.8)" text-anchor="middle" font-family="monospace">TOOL</text>
+        <text x="385" y="160" font-size="5" fill="rgba(255,255,255,0.3)" text-anchor="middle" font-family="monospace">MCP</text>
+
+        <!-- Connecting lines -->
+        <line x1="193" y1="96" x2="255" y2="112" stroke="rgba(74,158,255,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="193" y1="149" x2="255" y2="128" stroke="rgba(74,158,255,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="305" y1="112" x2="367" y2="96" stroke="rgba(245,200,66,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="305" y1="128" x2="367" y2="149" stroke="rgba(245,200,66,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- Animated pulse on orchestrator -->
+        <circle cx="280" cy="120" r="26" fill="none" stroke="rgba(229,9,20,0.3)" stroke-width="1">
+          <animate attributeName="r" from="26" to="40" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.4" to="0" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Status bar inside canvas -->
+        <rect x="148" y="210" width="268" height="18" rx="3" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="158" cy="219" r="3" fill="rgba(80,220,100,0.8)"/>
+        <rect x="166" y="216" width="60" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+        <rect x="236" y="216" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.07)"/>
+        <rect x="356" y="216" width="28" height="6" rx="3" fill="rgba(229,9,20,0.4)"/>
+        <text x="370" y="221" font-size="5" fill="rgba(255,255,255,0.7)" text-anchor="middle" font-family="monospace">LIVE</text>
+
+        <!-- Right panel: RAG + modules -->
+        <rect x="444" y="16" width="142" height="343" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="460" y="34" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)" font-weight="600" letter-spacing="1">MODULES</text>
+
+        <!-- Module cards -->
+        <rect x="454" y="44" width="122" height="28" rx="4" fill="rgba(229,9,20,0.08)" stroke="rgba(229,9,20,0.25)" stroke-width="1"/>
+        <text x="464" y="56" font-size="7" fill="rgba(229,9,20,0.8)" font-family="monospace">RAG Pipeline</text>
+        <text x="464" y="65" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">Retrieval · Embed · Generate</text>
+
+        <rect x="454" y="78" width="122" height="28" rx="4" fill="rgba(74,158,255,0.06)" stroke="rgba(74,158,255,0.2)" stroke-width="1"/>
+        <text x="464" y="90" font-size="7" fill="rgba(74,158,255,0.8)" font-family="monospace">Agents</text>
+        <text x="464" y="99" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">Multi-step reasoning</text>
+
+        <rect x="454" y="112" width="122" height="28" rx="4" fill="rgba(245,200,66,0.06)" stroke="rgba(245,200,66,0.2)" stroke-width="1"/>
+        <text x="464" y="124" font-size="7" fill="rgba(245,200,66,0.8)" font-family="monospace">Skills</text>
+        <text x="464" y="133" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">Custom workflows</text>
+
+        <rect x="454" y="146" width="122" height="28" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <text x="464" y="158" font-size="7" fill="rgba(255,255,255,0.5)" font-family="monospace">Connectors</text>
+        <text x="464" y="167" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">GCP · AWS · MCP</text>
+
+        <rect x="454" y="180" width="122" height="28" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <text x="464" y="192" font-size="7" fill="rgba(255,255,255,0.5)" font-family="monospace">App Builder</text>
+        <text x="464" y="201" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">No-code deployment</text>
+
+        <rect x="454" y="214" width="122" height="28" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <text x="464" y="226" font-size="7" fill="rgba(255,255,255,0.5)" font-family="monospace">Personas</text>
+        <text x="464" y="235" font-size="5.5" fill="rgba(255,255,255,0.3)" font-family="monospace">Role-aware context</text>
+
+        <!-- Bottom panel: metrics bar -->
+        <rect x="130" y="248" width="300" height="111" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="148" y="266" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)" font-weight="600" letter-spacing="1">DEPLOYMENT METRICS</text>
+
+        <!-- Metric boxes -->
+        <rect x="148" y="274" width="72" height="44" rx="4" fill="rgba(229,9,20,0.06)" stroke="rgba(229,9,20,0.15)" stroke-width="1"/>
+        <text x="184" y="292" font-family="monospace" font-size="14" fill="rgba(229,9,20,0.9)" text-anchor="middle" font-weight="bold">11</text>
+        <text x="184" y="310" font-family="monospace" font-size="5.5" fill="rgba(255,255,255,0.3)" text-anchor="middle">Modules</text>
+
+        <rect x="228" y="274" width="72" height="44" rx="4" fill="rgba(74,158,255,0.06)" stroke="rgba(74,158,255,0.15)" stroke-width="1"/>
+        <text x="264" y="292" font-family="monospace" font-size="14" fill="rgba(74,158,255,0.9)" text-anchor="middle" font-weight="bold">~90</text>
+        <text x="264" y="310" font-family="monospace" font-size="5.5" fill="rgba(255,255,255,0.3)" text-anchor="middle">Features</text>
+
+        <rect x="308" y="274" width="72" height="44" rx="4" fill="rgba(245,200,66,0.06)" stroke="rgba(245,200,66,0.15)" stroke-width="1"/>
+        <text x="344" y="292" font-family="monospace" font-size="14" fill="rgba(245,200,66,0.9)" text-anchor="middle" font-weight="bold">70+</text>
+        <text x="344" y="310" font-family="monospace" font-size="5.5" fill="rgba(255,255,255,0.3)" text-anchor="middle">Trained</text>
+      </svg>
+      <div class="thumb-overlay"></div>
+    </div>
+    <div class="featured-info">
+      <span class="featured-tag">Enterprise AI · SaaS</span>
+      <h2 class="featured-title">BAIONIQ</h2>
+      <div class="featured-role">PM Lead · Agentic AI Platform</div>
+      <p class="featured-desc">
+        End-to-end ownership of an enterprise agentic AI platform deployed on GCP/AWS — spanning RAG, Agents, Skills, Personas, Tools, Connectors, and App Builder. Built for non-technical enterprise users across 11 product modules.
+      </p>
+      <div class="product-stats">
+        <div class="stat">
+          <span class="stat-val">11</span>
+          <span class="stat-label">Modules Owned</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">~90</span>
+          <span class="stat-label">Features Shipped</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">70+</span>
+          <span class="stat-label">Users Trained</span>
+        </div>
+      </div>
+      <div class="product-tags">
+        <span class="tag">Agentic AI</span>
+        <span class="tag">RAG</span>
+        <span class="tag">GCP / AWS</span>
+        <span class="tag">MCP</span>
+        <span class="tag">Enterprise SaaS</span>
+        <span class="tag">0→1</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- OTHER PRODUCTS -->
+<section id="products">
+  <div class="section-label fade-up">
+    <h2>Also Built By Anjana</h2>
+    <span class="see-all">See All →</span>
+  </div>
+
+  <div class="cards-row">
+
+    <!-- Product 2: CareDesk -->
+    <div class="product-card fade-up">
+      <div class="card-thumb" style="background: #f5f2eb; padding:0; overflow:hidden; position:relative;">
+        <iframe
+          src="https://anjanasharmaa15-beep.github.io/caredesk-health-ai/"
+          style="width:200%; height:200%; transform:scale(0.5); transform-origin:top left; border:none; pointer-events:none; border-radius:0;"
+          scrolling="no"
+          title="CareDesk preview"
+        ></iframe>
+        <!-- hover overlay with link -->
+        <a href="https://anjanasharmaa15-beep.github.io/caredesk-health-ai/" target="_blank"
+           style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background 0.3s;text-decoration:none;"
+           onmouseenter="this.style.background='rgba(0,0,0,0.5)';this.querySelector('span').style.opacity='1'"
+           onmouseleave="this.style.background='rgba(0,0,0,0)';this.querySelector('span').style.opacity='0'">
+          <span style="opacity:0;transition:opacity 0.3s;background:var(--accent);color:#fff;padding:8px 18px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1px;">↗ VIEW LIVE</span>
+        </a>
+        <div class="card-progress"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-product-label">Health AI · Portfolio</div>
+        <div class="card-title">CAREDESK</div>
+        <div class="card-desc">AI chatbot for health practitioners. Built to demonstrate PM-to-engineer product thinking — live, shipped, and deployed.</div>
+        <div class="card-hover-info">
+          <div class="card-outcome">✦ Live at GitHub Pages · Built in 48hrs · Interview project</div>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="product-tags">
+            <span class="tag">Health AI</span>
+            <span class="tag">No-code</span>
+            <span class="tag">Portfolio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3: AI Signal -->
+    <div class="product-card fade-up">
+      <div class="card-thumb" style="background: linear-gradient(135deg, #070d14, #0a1520, #060d0a); position:relative; overflow:hidden;">
+        <!-- Animated signal rings -->
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="position:relative;width:80px;height:80px;">
+            <div style="position:absolute;inset:0;border-radius:50%;border:1px solid rgba(229,9,20,0.15);animation:signalPulse 2s ease-out infinite;"></div>
+            <div style="position:absolute;inset:-20px;border-radius:50%;border:1px solid rgba(229,9,20,0.1);animation:signalPulse 2s ease-out 0.6s infinite;"></div>
+            <div style="position:absolute;inset:-40px;border-radius:50%;border:1px solid rgba(229,9,20,0.05);animation:signalPulse 2s ease-out 1.2s infinite;"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:0.6;">📡</div>
+          </div>
+        </div>
+        <style>@keyframes signalPulse{0%{transform:scale(1);opacity:0.8}100%{transform:scale(2.2);opacity:0}}</style>
+        <!-- hover overlay with link -->
+        <a href="https://ai-signal-app-two.vercel.app/" target="_blank"
+           style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background 0.3s;text-decoration:none;"
+           onmouseenter="this.style.background='rgba(0,0,0,0.6)';this.querySelector('span').style.opacity='1'"
+           onmouseleave="this.style.background='rgba(0,0,0,0)';this.querySelector('span').style.opacity='0'">
+          <span style="opacity:0;transition:opacity 0.3s;background:var(--accent);color:#fff;padding:8px 18px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1px;">↗ VIEW LIVE</span>
+        </a>
+        <div class="card-progress"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-product-label">Side Project · Personal Build</div>
+        <div class="card-title">AI SIGNAL</div>
+        <div class="card-desc">The role-aware AI knowledge library. AI news, research, and product launches — automatically filtered for exactly who you are and where you work.</div>
+        <div class="card-hover-info">
+          <div class="card-outcome">✦ Live on Netlify · Built with Claude · Role × Industry filtering</div>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="product-tags">
+            <span class="tag">Side Project</span>
+            <span class="tag">AI Curation</span>
+            <span class="tag">Personalization</span>
+            <span class="tag">HTML / JS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end cards-row -->
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CRAFT / SKILLS -->
+<section id="craft">
+  <div class="section-label fade-up">
+    <h2>The Craft</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-group fade-up">
+      <h3>Domain Expertise</h3>
+      <div class="skill-tags">
+        <span class="skill-tag highlight">Agentic AI</span>
+        <span class="skill-tag highlight">RAG Pipelines</span>
+        <span class="skill-tag highlight">LLMs</span>
+        <span class="skill-tag">Enterprise SaaS</span>
+        <span class="skill-tag">0→1 Building</span>
+        <span class="skill-tag">Platform Thinking</span>
+        <span class="skill-tag">MCP / Tool Use</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <h3>PM Toolkit</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Roadmapping</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">PRD Writing</span>
+        <span class="skill-tag">User Research</span>
+        <span class="skill-tag">Workshop Facilitation</span>
+        <span class="skill-tag">Release Management</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <h3>Build Stack</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">GCP / AWS</span>
+        <span class="skill-tag">Lovable</span>
+        <span class="skill-tag">Cursor</span>
+        <span class="skill-tag">Claude</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">JIRA</span>
+        <span class="skill-tag">Confluence</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <h3>Working Style</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Cross-functional</span>
+        <span class="skill-tag">Direct Communicator</span>
+        <span class="skill-tag">Enterprise Client Facing</span>
+        <span class="skill-tag">Data-Informed</span>
+        <span class="skill-tag">Fast Shipper</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE / EPISODES -->
+<section id="experience">
+  <div class="section-label fade-up">
+    <h2>📺 Episode Guide — Work History</h2>
+  </div>
+
+  <!-- Season 1 -->
+  <div class="season fade-up">
+    <div class="season-header">
+      <div class="season-logo-placeholder">Q</div>
+      <div class="season-info">
+        <h3>Quantiphi</h3>
+        <div class="season-meta">PM Lead · Bengaluru, IN · Enterprise AI</div>
+      </div>
+      <div class="season-duration">2022 — NOW</div>
+    </div>
+    <div class="episodes">
+      <div class="episode">
+        <div class="ep-num">01</div>
+        <div class="ep-info">
+          <h4>PM Lead — Baioniq Platform</h4>
+          <p>Led end-to-end product strategy and roadmap across 11 modules of an enterprise agentic AI platform. Managed cross-functional engineering leads and enterprise client deployments on GCP/AWS.</p>
+          <div class="ep-impact">↑ ~90 features shipped · PNC, Insmed enterprise deployments</div>
+        </div>
+        <div class="ep-duration">2023 → Now</div>
+      </div>
+      <div class="episode">
+        <div class="ep-num">02</div>
+        <div class="ep-info">
+          <h4>Product Manager — Baioniq (Early Stage)</h4>
+          <p>Joined the Baioniq platform from its early build phase — contributed to foundational RAG architecture decisions, Skills framework design, and initial enterprise client scoping for deployments on GCP.</p>
+          <div class="ep-impact">↑ Grew from 0 to first enterprise client deployment</div>
+        </div>
+        <div class="ep-duration">2022 → 2023</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Season 2: Previous Company -->
+  <div class="season fade-up">
+    <div class="season-header">
+      <div class="season-logo-placeholder">⬡</div>
+      <div class="season-info">
+        <h3>[ Previous Company ] <span style="font-size:12px;color:var(--accent);font-weight:400;">← add company name</span></h3>
+        <div class="season-meta">Product Manager · Pharma / Life Sciences · [ Location ]</div>
+      </div>
+      <div class="season-duration">[ Year ] — 2022</div>
+    </div>
+    <div class="episodes">
+      <div class="episode">
+        <div class="ep-num">01</div>
+        <div class="ep-info">
+          <h4>Product Manager — Compliance & Inspection Digitization</h4>
+          <p>Owned the on-demand protocol and inspection digitization feature end-to-end — from discovery through rollout. Built for pharma facility compliance teams, replacing manual paper-based workflows with a structured digital process.</p>
+          <div class="ep-impact">↑ Adopted across 100+ pharmaceutical facilities</div>
+        </div>
+        <div class="ep-duration">[ Add duration ]</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CRITICALLY ACCLAIMED -->
+<section id="acclaim">
+  <div class="section-label fade-up">
+    <h2>⭐ Critically Acclaimed</h2>
+  </div>
+
+  <div class="acclaim-grid">
+    <div class="acclaim-card fade-up">
+      <div class="acclaim-number">11</div>
+      <div class="acclaim-label">Product Modules Owned End-to-End</div>
+      <div class="acclaim-context">Full roadmap ownership across RAG, Agents, Skills, Personas, Tools, Connectors, and App Builder on Baioniq.</div>
+    </div>
+    <div class="acclaim-card fade-up">
+      <div class="acclaim-number">70+</div>
+      <div class="acclaim-label">Enterprise Users Trained</div>
+      <div class="acclaim-context">Led hands-on AI workshop for PNC HR professionals, building a custom prompting framework — C.T.O.E. — from scratch.</div>
+    </div>
+    <div class="acclaim-card fade-up">
+      <div class="acclaim-number">100+</div>
+      <div class="acclaim-label">Facilities · Pharma Protocol Feature</div>
+      <div class="acclaim-context">On-demand inspection digitization feature adopted across 100+ pharmaceutical facilities in a previous role.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-eyebrow fade-up">Now Streaming</div>
+  <h2 class="contact-title fade-up">LET'S<br>BUILD.</h2>
+  <p class="contact-sub fade-up">Open to AI PM roles where product depth meets real impact.</p>
+
+  <div class="contact-links fade-up">
+    <a href="https://linkedin.com/in/anjanasharmaa240" class="contact-link">
+      <span>in</span> LinkedIn
+    </a>
+    <a href="https://github.com/anjanasharmaa15-beep" class="contact-link">
+      <span>⌥</span> GitHub
+    </a>
+    <a href="https://anjanasharmaa15-beep.github.io/caredesk-health-ai/" class="contact-link">
+      <span>↗</span> CareDesk (Live)
+    </a>
+    <a href="mailto:anjana.sharmaa15@gmail.com" class="contact-link">
+      <span>✉</span> Email
+    </a>
+  </div>
+
+  <div class="open-to fade-up">Open to: AI PM · Enterprise SaaS · Agentic AI roles</div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0
