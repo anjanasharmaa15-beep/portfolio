@@ -1360,4 +1360,6 @@
         setTimeout(() => entry.target.classList.add('visible'), i * 80);
       }
     });
-  }, { threshold: 0
+  }, { threshold: 0 });
+   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
